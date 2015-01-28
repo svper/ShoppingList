@@ -1,5 +1,9 @@
 /* app css stylesheet */
-
+body{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -9,4 +13,38 @@
 
 .menu > li {
   display: inline;
+}
+
+.btn{
+    margin-bottom: 5px;
+}
+.shopFilter{
+    margin-right: 5px;
+}
+
+.shopFilter.all{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.row.item{
+    border-bottom: 1px dotted black;
+    margin: 5px 0 5px 0;
+}
+
+.btn.delete{
+}
+
+.btn.approve{
+}
+
+.item .description{
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.footer{
+    position:fixed;
+    bottom:0;
+    width:100%
 }
