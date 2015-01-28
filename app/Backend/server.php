@@ -154,7 +154,7 @@ function getItemLists()
 
     $jsonData = array();
     while ($array = $result->fetch_row()) {
-        $obj = new Item($array[0], $array[1], $array[2], $array[3], $array[4]);
+        $obj = new Item($array[0], $array[1], $array[2], $array[3], $array[5]);
         $jsonData[] = $obj;
     }
     return json_encode($jsonData);

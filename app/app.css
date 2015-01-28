@@ -36,10 +36,16 @@ body{
 }
 
 .btn.approve{
+    float: right;
 }
 
 .item .description{
     font-weight: bold;
+    margin-top: 10px;
+}
+
+.item .shopname{
+    font-style: italic;
     margin-top: 10px;
 }
 
