@@ -57,40 +57,6 @@ class Shop
 
 }
 
-// Public
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "deb38057_shop";
-
-
-function getShops()
-{
-    $servername = "localhost";
-    $username = "deb38057_shop";
-    $password = "rvshop";
-    $dbname = "deb38057_shop";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $sql = "SELECT * FROM `Shop`";
-    $result = $conn->query($sql);
-
-    $jsonData = array();
-    while ($array = $result->fetch_row()) {
-        $obj = new Shop($array[0], $array[1]);
-        $jsonData[] = $obj;
-    }
-    return json_encode($jsonData);
-
-
-}
-
 function done()
 {
     $_GET["id"];
@@ -107,7 +73,7 @@ function done()
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "UPDATE `ListItem` SET Done=1 WHERE Id=" . $_GET["id"];
+    $sql = "UPDATE listitem SET Done=1 WHERE Id=" . $_GET["id"];
 
     if ($conn->query($sql) === TRUE) {
         return true;
@@ -144,7 +110,32 @@ function add($item)
     }
 }
 
+function getShops()
+{
+    $servername = "localhost";
+    $username = "deb38057_shop";
+    $password = "rvshop";
+    $dbname = "deb38057_shop";
 
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM shop";
+    $result = $conn->query($sql);
+
+    $jsonData = array();
+    while ($array = $result->fetch_row()) {
+        $obj = new Shop($array[0], $array[1]);
+        $jsonData[] = $obj;
+    }
+    return json_encode($jsonData);
+
+
+}
 function getItemLists()
 {
     $servername = "localhost";
@@ -158,7 +149,7 @@ function getItemLists()
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT l.*,s.Name FROM `ListItem` l , `Shop` s WHERE l.ShopId = s.Id AND l.Done = 0";
+    $sql = "SELECT l.*,s.Name FROM listitem l , shop s WHERE l.ShopId = s.Id AND l.Done = 0";
     $result = $conn->query($sql);
 
     $jsonData = array();

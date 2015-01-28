@@ -13,14 +13,14 @@ angular.module('myApp.List', ['ngRoute'])
         $scope.filters = { };
 
         $scope.getShops = function(){
-            $http.post('../Backend/server.php?method=shops', { }).
+            $http.post('Backend/server.php?method=shops', { }).
                 success(function(data, status) {
                     $scope.shops = data;
                 });
         };
 
         $scope.getItems = function(){
-            $http.post('../Backend/server.php?method=items', { }).
+            $http.post('Backend/server.php?method=items', { }).
                 success(function(data, status) {
                     $scope.items = data;
                 });
@@ -29,7 +29,7 @@ angular.module('myApp.List', ['ngRoute'])
         $scope.save = function(item){
             if(item && item.Description){
                 console.log(item);
-                $http.post('../Backend/server.php?method=add', { "item": item}).
+                $http.post('Backend/server.php?method=add', { "item": item}).
                     success(function(data, status) {
                         $scope.getItems();
                     });
@@ -38,7 +38,7 @@ angular.module('myApp.List', ['ngRoute'])
 
         $scope.delete = function(id){
             console.log(id);
-            $http.post('../Backend/server.php?method=done&id=' +id, { }).
+            $http.post('Backend/server.php?method=done&id=' +id, { }).
                 success(function(data, status) {
                     $scope.getItems();
                 });

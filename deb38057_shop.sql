@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.6
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Gegenereerd op: 20 jan 2015 om 00:30
--- Serverversie: 5.5.34-MariaDB-cll-lve
--- PHP-versie: 5.3.28
+-- Machine: 127.0.0.1
+-- Gegenereerd op: 28 jan 2015 om 03:32
+-- Serverversie: 5.6.17
+-- PHP-versie: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,46 +17,48 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `deb38057_shop`
+-- Databank: `deb38057_shop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `ListItem`
+-- Tabelstructuur voor tabel `listitem`
 --
 
-CREATE TABLE IF NOT EXISTS `ListItem` (
-  `Id` int(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS `listitem` (
+  `Id` int(50) NOT NULL AUTO_INCREMENT,
   `ShopId` int(50) NOT NULL,
   `Description` varchar(250) NOT NULL,
-  `Quantity` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `Quantity` varchar(250) DEFAULT NULL,
+  `Done` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Gegevens worden geëxporteerd voor tabel `ListItem`
+-- Gegevens worden geëxporteerd voor tabel `listitem`
 --
 
-INSERT INTO `ListItem` (`Id`, `ShopId`, `Description`, `Quantity`) VALUES
-(1, 2, 'Pindanoten', '2 zakken'),
-(2, 2, 'Eieren', '10');
+INSERT INTO `listitem` (`Id`, `ShopId`, `Description`, `Quantity`, `Done`) VALUES
+(6, 1, 'Testje', NULL, b'1');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `Shop`
+-- Tabelstructuur voor tabel `shop`
 --
 
-CREATE TABLE IF NOT EXISTS `Shop` (
-  `Id` int(50) NOT NULL,
-  `Name` varchar(250) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `shop` (
+  `Id` int(50) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(250) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Gegevens worden geëxporteerd voor tabel `Shop`
+-- Gegevens worden geëxporteerd voor tabel `shop`
 --
 
-INSERT INTO `Shop` (`Id`, `Name`) VALUES
+INSERT INTO `shop` (`Id`, `Name`) VALUES
 (1, 'Algemeen'),
 (2, 'Delhaize'),
 (3, 'Aldi'),
@@ -64,36 +66,6 @@ INSERT INTO `Shop` (`Id`, `Name`) VALUES
 (5, 'Ikea'),
 (6, 'Decathlon');
 
---
--- Indexen voor geëxporteerde tabellen
---
-
---
--- Indexen voor tabel `ListItem`
---
-ALTER TABLE `ListItem`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indexen voor tabel `Shop`
---
-ALTER TABLE `Shop`
-  ADD PRIMARY KEY (`Id`);
-
---
--- AUTO_INCREMENT voor geëxporteerde tabellen
---
-
---
--- AUTO_INCREMENT voor een tabel `ListItem`
---
-ALTER TABLE `ListItem`
-  MODIFY `Id` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT voor een tabel `Shop`
---
-ALTER TABLE `Shop`
-  MODIFY `Id` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
