@@ -1,43 +1,67 @@
-<a class="btn btn-warning shopFilter all" ng-click="filters.ShopId = ''" style="display: inline">Alles</a>
-<a ng-repeat="shop in shops" class="btn btn-primary shopFilter" style="display: inline"
-   ng-click="filters.ShopId = shop.Id">{{shop.Description}}</a>
+
+<div class="content">
+    <a class="btn btn-warning shopFilter all" ng-click="filters.ShopId = ''">Alles</a>
+    <a ng-repeat="shop in shopFilters | filter: greaterThan('ItemCount', 0)" class="btn btn-primary shopFilter"
+       ng-click="filters.ShopId = shop.Id">{{shop.Description}}</a>
 
 
-<table class="table">
-    <tr class="row item" ng-repeat="item in items| filter:filters">
-        <td class="">
-            <div class="description"><span class="glyphicon glyphicon-star-empty"></span> {{item.Description}}
-                {{item.Quantity}}
-            </div>
-        </td>
-        <td>
-            <div class="shopname">{{item.ShopName}}</div>
-        </td>
-        <td class="">
-            <button class="btn btn-success btn-lg approve" ng-click="delete(item.Id)"><i
-                    class="glyphicon glyphicon-ok"></i></button>
-        </td>
-    </tr>
-</table>
-
+    <table class="table">
+        <tr class="row item" ng-repeat="item in items| filter:filters">
+            <td class="">
+                <div class="description">
+                    <span class="glyphicon glyphicon-menu-right"></span> {{item.Description}}
+                    {{item.Quantity}}
+                </div>
+            </td>
+            <td>
+                <div class="shopname">{{item.ShopName}}</div>
+            </td>
+            <td class="">
+                <button class="btn btn-success btn-lg approve" ng-click="delete(item.Id)">
+                    <i class="glyphicon glyphicon-ok"></i>
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
 <div class="footer">
     <form novalidate>
         <div class="container-fluid">
-            <div class="row">
+            <div class="row animate-hide" ng-show="showAdd">
                 <div class="col-md-2">
-                    <button class="btn btn-success btn-block btn-lg add" ng-click="save(newItem)"><i
-                            class="glyphicon glyphicon-plus"></i></button>
+                    <button class="btn btn-success btn-block btn-lg add" ng-click="save(newItem)">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
                 </div>
-                <div class="col-md-5"><input type="text" class="form-control" id="Description"
-                                             placeholder="Beschrijving" ng-model="newItem.Description"></div>
-                <div class="col-md-3"><input type="text" class="form-control" id="Quantity" placeholder="Aantal"
-                                             ng-model="newItem.Quantity"></div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="Description"
+                           placeholder="Beschrijving" ng-model="newItem.Description">
+                </div>
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="Quantity" placeholder="Aantal"
+                           ng-model="newItem.Quantity">
+                </div>
                 <div class="col-md-2">
                     <select id="shop" class="form-control" ng-model="newItem.ShopId">
                         <option ng-repeat="shop in shops" value="{{shop.Id}}"
-                                ng-selected="shop.Description == 'Algemeen'">{{shop.Description}}
+                                ng-selected="shop.Description == 'Algemeen'">
+                            {{shop.Description}}
                         </option>
                     </select>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-danger btn-block btn-lg add" ng-click="showAdd = false">
+                        <i class="glyphicon glyphicon-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="row animate-hide" ng-hide="showAdd">
+                <div class="col-md-12">
+                    <button class="btn btn-success btn-block btn-lg add" ng-click="showAdd = true">
+                        <i class="glyphicon glyphicon-chevron-up"></i>
+                    </button>
                 </div>
             </div>
 

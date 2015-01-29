@@ -19,10 +19,12 @@ body{
     margin-bottom: 5px;
 }
 .shopFilter{
+    display:inline-block;
     margin-right: 5px;
 }
 
 .shopFilter.all{
+    display:inline-block;
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -53,4 +55,8 @@ body{
     position:fixed;
     bottom:0;
     width:100%
+}
+
+.content {
+margin-bottom: 55px;
 }

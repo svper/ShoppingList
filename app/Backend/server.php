@@ -57,6 +57,20 @@ class Shop
 
 }
 
+class Filter
+{
+    public $Id;
+    public $Description;
+public $ItemCount;
+    // Assigning the values
+    public function __construct($Id, $Description,$ItemCount)
+    {
+        $this->Id = $Id;
+        $this->Description = $Description;
+        $this->ItemCount = $ItemCount;
+    }
+}
+
 function done()
 {
     $_GET["id"];
@@ -136,6 +150,34 @@ function getShops()
 
 
 }
+
+
+
+function getFilters()
+{
+    $servername = "localhost";
+    $username = "deb38057_shop";
+    $password = "rvshop";
+    $dbname = "deb38057_shop";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "select s.Id,s.Name,count(*) from listitem l,shop s WHERE s.Id = l.ShopId AND l.Done = 0 GROUP BY l.ShopId ORDER BY l.ShopId ASC";
+    $result = $conn->query($sql);
+
+    $jsonData = array();
+    while ($array = $result->fetch_row()) {
+        $obj = new Filter($array[0], $array[1], $array[2]);
+        $jsonData[] = $obj;
+    }
+    return json_encode($jsonData);
+
+}
+
 function getItemLists()
 {
     $servername = "localhost";
@@ -170,6 +212,9 @@ switch ($_GET['method']) {
         break;
     case "shops":
         echo getShops();
+        break;
+            case "filters":
+        echo getFilters();
         break;
     case "done":
         echo done();
